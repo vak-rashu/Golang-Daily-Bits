@@ -1,0 +1,81 @@
+package main
+
+import (
+	"fmt"
+)
+
+type s struct{}
+
+type Details struct {
+	Name string
+	Age  int
+}
+
+type mapSet map[string]struct{}
+
+func (rec mapSet) add(val string) {
+	set := s{}
+	rec[val] = set
+}
+
+func (rec mapSet) del(val string) {
+	delete(rec, val)
+}
+
+func (rec mapSet) has(val string) bool {
+	_, exist := rec[val]
+	if exist {
+		return exist
+	} else {
+		return exist
+	}
+}
+func main() {
+	mapset := make(mapSet)
+
+	mapStruct := &Details{"Aarav", 10}
+	mapStruct.Name = "KD"
+	mapStruct.Age = 10
+	fmt.Println(mapStruct)
+
+	mapset.add("value")
+	mapset.add("value")
+	mapset.del("none")
+	fmt.Println(mapset.has("none"))
+	fmt.Println(mapset, mapSet{})
+}
+
+
+//word comparator
+/*type s struct{}
+type mapSet map[string]struct{}
+
+func (rec mapSet) add(str string) {
+	set := s{}
+	strSet := strings.Fields(str)
+	for _, val := range strSet {
+		rec[val] = set
+	}
+}
+
+func Compare(set1, set2 mapSet) {
+	for key := range set1 {
+		_, exists := set2[key]
+		if !exists {
+			fmt.Println(key)
+		}
+	}
+}
+
+func main() {
+	str1 := "Hello this is Nightangle"
+	str2 := "Nope dude ain't no here honey"
+
+	set1 := make(mapSet)
+	set2 := make(mapSet)
+
+	set1.add(str1)
+	set2.add(str2)
+
+	Compare(set2, set1)
+}*/
