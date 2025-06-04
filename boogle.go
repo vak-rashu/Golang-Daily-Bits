@@ -8,7 +8,7 @@ import (
 )
 
 var docs map[int]string = map[int]string{
-	1: "Dogs, cats are bad",
+	1: "Dogs, cats are pet animals",
 	2: "cats are good thoug",
 }
 
@@ -34,6 +34,11 @@ func add(doc map[int]string, text string) {
 
 func QueryParser(query string) (sliceVal []string) {
 	strSlice := strings.Split(query, " ")
+	if len(strSlice) != 3 {
+		fmt.Println("Query is not valid.")
+		return
+
+	}
 	first_val := strings.ToLower(strSlice[0])
 	bool_val := strings.ToLower(strSlice[1])
 	last_val := strings.ToLower(strSlice[2])
@@ -51,10 +56,20 @@ func QueryParser(query string) (sliceVal []string) {
 				sliceVal = append(sliceVal, docs[i])
 			}
 		}
-
+	case "not":
+		for i := range docs {
+			if strings.Contains(strings.ToLower(docs[i]), first_val) && !(strings.Contains(strings.ToLower(docs[i]), last_val)) {
+				sliceVal = append(sliceVal, docs[i])
+			}
+		}
+	default:
+		for i := range docs {
+			if !(strings.Contains(strings.ToLower(docs[i]), first_val)) || !(strings.Contains(strings.ToLower(docs[i]), last_val)) {
+				sliceVal = append(sliceVal, docs[i])
+			}
+		}
 	}
 	return
-
 }
 
 func Search() {
